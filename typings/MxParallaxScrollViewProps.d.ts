@@ -4,6 +4,8 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
+import { DynamicValue } from "mendix";
+import { Big } from "big.js";
 
 export interface MxParallaxScrollViewProps<Style> {
     name: string;
@@ -12,7 +14,7 @@ export interface MxParallaxScrollViewProps<Style> {
     parallaxHeader?: ReactNode;
     content?: ReactNode;
     fixedHeaderHeight: number;
-    parallaxHeaderHeight: number;
+    parallaxHeaderHeight: DynamicValue<Big>;
     contentHeaderHeight: number;
 }
 
@@ -25,6 +27,6 @@ export interface MxParallaxScrollViewPreviewProps {
     parallaxHeader: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     fixedHeaderHeight: number | null;
-    parallaxHeaderHeight: number | null;
+    parallaxHeaderHeight: string;
     contentHeaderHeight: number | null;
 }

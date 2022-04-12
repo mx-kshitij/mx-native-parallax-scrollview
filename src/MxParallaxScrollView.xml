@@ -11,7 +11,7 @@
 >
     <name>Mx Parallax Scroll View</name>
     <description>My widget description</description>
-    <icon />
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAIGSURBVHgB7dgxaBNRGMDx/0uuKRFrURBESlKsrdAtIASFpCk4iItD4AYns7gKgqtdFGcnN9FBxExCBN2sKNZFKNhBMMMFQYtVLHg1NmKeL2rBxeqS9wrf9wvh3nEhefc/8kjOlMtlWywW8aHb7dJqtebdcPEvL6nV6/VH2WwWHzqdDpRKJevGXp5xHA+2tW3mVKtWq97mU6lUbAbhNADCRbMH5jkT38CHfmGFpntsp9FocOXyVXopQzW6x9JsNonS1QwrD/L4cDD+v9W9t2F4szTCsIzkLcVq7+dY1wCE0wAIpwEQTgMgnAZAuKABJrD7CCxogFG4ewh7ioAiApnGnnW3ZU4YKExinyWY9a1jxl2WKG8Zlj/fO1AAa/qwYH7tzLj/iBfc9tJgJ2NTxnKvOXKM4fo2+KyNMAGm4aK7BpNb+y7E+SL2eseNdneXKKzdw4ddm7NhAriTP+xO+mafvvsK2GVD9oObyJw7tIpnQQK0MecG2yk271i+3moz/vD3oRqe6e8AhNMACKcBEE4DIJwGQLioMPOSk8cX8OHd/gl2mmhs/CNH557gw9O10+w0ugYgnAZAOA2AcBoA4TQAwmkAhNMACKc3RAjoO7lrkEsIKGiABPOcwHQNQDgNgHAaAOE0AMJpAISLHi9/Sj6nU/jwNn3/r5es377/Klnc62c+L9pf+AGnuKk0x2H3ygAAAABJRU5ErkJggg==</icon>
     <properties>
         <propertyGroup caption="General">
             <property key="fixedHeader" type="widgets" required="false">
@@ -30,9 +30,10 @@
                 <caption>Fixed header height</caption>
                 <description />
             </property>
-            <property key="parallaxHeaderHeight" type="integer" defaultValue="50">
+            <property key="parallaxHeaderHeight" type="expression" defaultValue="50">
                 <caption>Parallax header height</caption>
                 <description />
+                <returnType type="Integer" />
             </property>
             <property key="contentHeaderHeight" type="integer" defaultValue="1000">
                 <caption>Content height</caption>

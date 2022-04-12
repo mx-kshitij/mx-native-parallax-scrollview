@@ -1,12 +1,9 @@
-import React, {
-  createElement,
-} from "react";
+import React, { createElement } from "react";
 
 import { Style } from "@mendix/pluggable-widgets-tools";
 
 import { ParallaxScrollView } from "./components/ParallaxScrollView";
 import { MxParallaxScrollViewProps } from "../typings/MxParallaxScrollViewProps";
-// const ParallaxScrollView = require("./components/ParallaxScrollView");
 
 import {
   Animated,
@@ -14,7 +11,8 @@ import {
   SafeAreaView,
   StyleSheet,
   TextStyle,
-  ViewStyle
+  ViewStyle,
+  ScrollView
 } from 'react-native';
 
 export interface CustomStyle extends Style {
@@ -29,9 +27,16 @@ export interface styleProps {
   contentHeaderHeight: number;
 }
 
+
 export class MxParallaxScrollView extends React.Component<MxParallaxScrollViewProps<CustomStyle>> {
+
   renderParallaxHeader = (_value: any, _styleProps: any) => {
-    return (<View>{this.props.parallaxHeader}</View>)
+    return (
+      <View>
+        <ScrollView nestedScrollEnabled={true} decelerationRate={0.5}>
+          {this.props.parallaxHeader}
+        </ScrollView>
+      </View>)
   };
 
   renderFixedHeader = (_value: any, styleProps: any) => {
@@ -56,11 +61,13 @@ export class MxParallaxScrollView extends React.Component<MxParallaxScrollViewPr
   };
 
   render(): React.ReactNode {
-    // const IHeight = 250;
-    // const HeaderHeight = 50;
+    if (this.props.parallaxHeaderHeight?.value === undefined) {
+      return null;
+    }
+
     const styleProps = {
       fixedHeaderHeight: this.props.fixedHeaderHeight,
-      parallaxHeaderHeight: this.props.parallaxHeaderHeight,
+      parallaxHeaderHeight: this.props.parallaxHeaderHeight.value!.toNumber(),
       contentHeaderHeight: this.props.contentHeaderHeight
     }
 
@@ -68,14 +75,13 @@ export class MxParallaxScrollView extends React.Component<MxParallaxScrollViewPr
       <SafeAreaView style={{ flex: 1 }}>
         <ParallaxScrollView
           style={{ flex: 1 }}
-          parallaxHeaderHeight={this.props.parallaxHeaderHeight}
+          parallaxHeaderHeight={this.props.parallaxHeaderHeight.value!.toNumber()}
           stickyHeaderHeight={this.props.fixedHeaderHeight}
           parallaxHeader={this.renderParallaxHeader}
           fixedHeader={this.renderFixedHeader}
           stickyHeader={this.renderStickyHeader}
           styleProps={styleProps}>
           <View style={Styles(styleProps).content}>
-            {/* <Text>Content</Text> */}
             {this.props.content}
           </View>
         </ParallaxScrollView>
@@ -93,25 +99,19 @@ const Styles = (props: styleProps) => StyleSheet.create({
   fixedHeader: {
     height: props.fixedHeaderHeight,
     width: '100%',
-    // padding: 10,
     justifyContent: 'center',
   },
   stickyHeader: {
     height: props.fixedHeaderHeight,
     width: '100%',
     zIndex: 2
-    // backgroundColor: 'rgba(0,0,0,0.4)',
   },
   stickyHeaderBackground: {
-    //   ...StyleSheet.absoluteFill,
     backgroundColor: 'purple',
   },
   content: {
     width: '100%',
     height: 'auto',
     flex: 1
-    // height: props.contentHeaderHeight,
-    // padding: 20,
-    // backgroundColor: 'green',
   },
 });

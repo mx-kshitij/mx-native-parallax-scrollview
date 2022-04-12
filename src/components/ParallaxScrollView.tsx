@@ -3,13 +3,7 @@ import React, {
 } from "react";
 import { Animated, View, StyleSheet } from "react-native";
 
-// import { CustomStyle } from "../MxParallaxScrollView";
-
-// import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
-
-
 export interface ParallaxScrollViewProps {
-    // name?: string;
     style?: any;
     parallaxHeaderHeight?: any;
     stickyHeaderHeight?: any;
@@ -29,6 +23,7 @@ export class ParallaxScrollView extends React.Component<ParallaxScrollViewProps>
         scaleParallaxHeader: true,
     };
 
+
     _animatedValue = new Animated.Value(0);
     opacity: any;
 
@@ -42,6 +37,7 @@ export class ParallaxScrollView extends React.Component<ParallaxScrollViewProps>
         const { parallaxHeaderHeight = 0, stickyHeaderHeight = 0 } = this.props;
         return Math.abs(parallaxHeaderHeight - stickyHeaderHeight);
     }
+
 
     onScroll = ({ value }: any) => {
         const { onScroll, onSticky, stickyHeaderHeight } = this.props;
@@ -63,7 +59,9 @@ export class ParallaxScrollView extends React.Component<ParallaxScrollViewProps>
         }
 
         return (
-            <View style={Styles.fixedHeader}>{fixedHeader(this._animatedValue, this.props.styleProps)}</View>
+            <View style={Styles(this.props).fixedHeader}>
+                {fixedHeader(this._animatedValue, this.props.styleProps)}
+            </View>
         );
     }
 
@@ -77,6 +75,7 @@ export class ParallaxScrollView extends React.Component<ParallaxScrollViewProps>
 
         return stickyHeader(this._animatedValue, this.props.styleProps);
     }
+
 
     renderParallaxHeader() {
         const {
@@ -102,8 +101,14 @@ export class ParallaxScrollView extends React.Component<ParallaxScrollViewProps>
                 outputRange: [1, 0],
                 extrapolate: 'clamp'
             });
+            
             animationStyle = {
-                transform: [{ scale }],
+                transform: [{ scale }, {
+                    translateY: this._animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 0.5]
+                    })
+                  }],
             };
         }
 
@@ -111,7 +116,7 @@ export class ParallaxScrollView extends React.Component<ParallaxScrollViewProps>
             <View>
                 <Animated.View
                     style={[
-                        Styles.parallaxHeader,
+                        Styles(this.props).parallaxHeader,
                         animationStyle,
                         { height: parallaxHeaderHeight },
                         { opacity: this.opacity }
@@ -159,12 +164,13 @@ export class ParallaxScrollView extends React.Component<ParallaxScrollViewProps>
     }
 }
 
-const Styles = StyleSheet.create({
+const Styles = (prop: any) => StyleSheet.create({
     fixedHeader: {
         position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
+        height: prop.fixedHeaderHeight
     },
 
     parallaxHeader: {
