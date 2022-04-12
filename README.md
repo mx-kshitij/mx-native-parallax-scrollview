@@ -1,24 +1,16 @@
 ## MxParallaxScrollView
-[My widget description]
 
-## Features
-[feature highlights]
+![Cover](https://user-images.githubusercontent.com/87490254/162902472-9c687475-8319-483c-8e0e-e6aeac00e0c9.png)
+
+This pluggable native widget has 3 sections : 
+
+Fixed header
+Parallax section
+Content
+You can place your Mendix components inside the widget sections and set appropriate height for each section.
 
 ## Usage
-[step by step instructions]
+Download from 
 
 ## Demo project
-[link to sandbox]
-
-## Issues, suggestions and feature requests
-[link to GitHub issues]
-
-## Development and contribution
-
-1. Install NPM package dependencies by using: `npm install`. If you use NPM v7.x.x, which can be checked by executing `npm -v`, execute: `npm install --legacy-peer-deps`.
-1. Run `npm start` to watch for code changes. On every change:
-    - the widget will be bundled;
-    - the bundle will be included in a `dist` folder in the root directory of the project;
-    - the bundle will be included in the `deployment` and `widgets` folder of the Mendix test project.
-
-[specify contribution]
+https://vimeo.com/697324798
